@@ -89,3 +89,20 @@ systemctl isolate graphical.target -- N 5
 - ``` apt-key list ``` - to check for GPG keys
 - ``` ls /etc/apt/trusted.gpg.d/ ``` 
 
+## Zombie Process:
+
+- A zombie process is a process that has finished execution but is still present in the process table because its parent process didn’t read its exit status.
+
+     - It is already dead, not consuming CPU or memory.
+
+     - It cannot be killed (kill -9 doesn’t work) because it's already dead.
+
+     - It only disappears when the parent collects (reaps) it, in linux it appears in process Z state.
+
+    ```  ps aux | grep Z ```
+
+- **why:** Zombie processes occur due to bad parent process behavior
+      - When a child process exits, Linux sends a SIGCHLD signal to the parent. If the parent does not call wait() or waitpid() to collect the exit code, the child becomes a zombie.    
+
+- **Fix:** restart the parent service - best method
+    - kill the parent process if the parent is buggy, in thatb case inti process (PID1) will adopt them and reap them.
