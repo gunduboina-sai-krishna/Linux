@@ -82,10 +82,10 @@ systemctl isolate graphical.target -- N 5
 | SGID        | 2xxx        |
 | Sticky Bit  | 1xxx        |
 
+
 **Check package repo and gpg keys**
 - ``` sudo apt-cache policy ``` - list all apt repositories
 - ``` ls -l /etc/apt/sources.list.d ``` - lists the added packages
 - ``` apt-key list ``` - to check for GPG keys
 - ``` ls /etc/apt/trusted.gpg.d/ ``` 
-
 
